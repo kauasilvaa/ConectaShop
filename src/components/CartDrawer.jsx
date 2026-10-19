@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { X, Plus, Minus, Trash2 } from 'lucide-react';
 
 export function CartDrawer({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) {
@@ -35,8 +36,8 @@ export function CartDrawer({ isOpen, onClose, cartItems, onUpdateQuantity, onRem
                 <div key={item.id} className="flex gap-4 border-b border-gray-100 pb-4 items-center">
                   <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded-lg" />
                   <div className="flex-1">
-                    <h4 className="text-sm font-semibold text-gray-800">{item.name}</h4>
-                    <span className="text-sm font-bold text-blue-600 block mt-1">
+                    <h4 className="text-sm font-semibold text-gray-800 line-clamp-1">{item.name}</h4>
+                    <span className="text-sm font-bold text-red-600 block mt-1">
                       R$ {item.price.toFixed(2)}
                     </span>
 
@@ -73,11 +74,15 @@ export function CartDrawer({ isOpen, onClose, cartItems, onUpdateQuantity, onRem
             <div className="p-4 border-t border-gray-200 bg-gray-50 space-y-3">
               <div className="flex justify-between text-base font-bold text-gray-900">
                 <span>Total</span>
-                <span>R$ {total.toFixed(2)}</span>
+                <span className="text-red-600">R$ {total.toFixed(2)}</span>
               </div>
-              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-colors">
+              <Link 
+                to="/checkout" 
+                onClick={onClose}
+                className="block w-full text-center bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md"
+              >
                 Finalizar Compra
-              </button>
+              </Link>
             </div>
           )}
 

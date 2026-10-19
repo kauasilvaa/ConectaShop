@@ -5,6 +5,7 @@ import { CartDrawer } from './components/CartDrawer';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
 import { ProductDetail } from './pages/ProductDetail';
+import { Checkout } from './pages/Checkout';
 
 export default function App() {
   const [cart, setCart] = useState([]);
@@ -34,6 +35,10 @@ export default function App() {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const handleClearCart = () => {
+    setCart([]);
+  };
+
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
@@ -45,6 +50,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
             <Route path="/product/:id" element={<ProductDetail onAddToCart={handleAddToCart} />} />
+            <Route path="/checkout" element={<Checkout cartItems={cart} onClearCart={handleClearCart} />} />
           </Routes>
         </div>
 
